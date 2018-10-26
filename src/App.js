@@ -101,7 +101,7 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: parseInt(event.target.value) });
   }
 
   handleSubmit(event) {
