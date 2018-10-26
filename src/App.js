@@ -9,6 +9,7 @@ class App extends Component {
     this.se_tax_fields = [
       {
         name: "1a",
+        firstField: true,
         instruction: "Enter your expected income and profits subject to self-employment tax*",
         explanation: "",
         computed: false,
@@ -124,6 +125,10 @@ class App extends Component {
     event.preventDefault();
   }
 
+  componentDidMount(){
+    this.initialFocusField.focus();
+  }
+
   displayValue(field) {
     if (field.computed) {
       return this.state[field.name].toFixed(2)
@@ -138,17 +143,26 @@ class App extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          {this.se_tax_fields.map((field, i) =>
-            <label key={i}>
-              <div><span>{field.name}. </span>{field.instruction}</div>
-              <input name={field.name} disabled={field.computed} value={this.displayValue(field)} type="number" onChange={this.handleChange}/>
-            </label>
-          )}
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className='App-container'>
+        <form onSubmit={this.handleSubmit}>
+            {this.se_tax_fields.map((field, i) =>
+              <label key={i}>
+                <div><span>{field.name}. </span>{field.instruction}</div>
+                <input
+                  name={field.name}
+                  ref={(input) => { if (field.firstField) { this.initialFocusField = input } }}
+                  disabled={field.computed}
+                  value={this.displayValue(field)}
+                  type="number"
+                  onChange={this.handleChange}
+                  className='App-field' />
+              </label>
+            )}
+          <div>
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      </div>
     );
   }
 }
