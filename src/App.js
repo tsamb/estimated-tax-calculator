@@ -121,7 +121,7 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    alert(`You are able to deduct $${this.state['11']} of your self employment taxes this year`);
+    alert(`You are able to deduct $${this.state['11'].toFixed(2)} of your self employment taxes this year`);
     event.preventDefault();
   }
 
