@@ -124,6 +124,18 @@ class App extends Component {
     event.preventDefault();
   }
 
+  displayValue(field) {
+    if (field.computed) {
+      return this.state[field.name].toFixed(2)
+    } else {
+      if (this.state[field.name] == 0) {
+        return ''
+      } else {
+        return this.state[field.name]
+      }
+    }
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -131,7 +143,7 @@ class App extends Component {
           {this.se_tax_fields.map((field, i) =>
             <label key={i}>
               <div><span>{field.name}. </span>{field.instruction}</div>
-              <input name={field.name} disabled={field.computed} value={field.computed ? this.state[field.name].toFixed(2) : this.state[field.name]} type="number" onChange={this.handleChange}/>
+              <input name={field.name} disabled={field.computed} value={this.displayValue(field)} type="number" onChange={this.handleChange}/>
             </label>
           )}
         </div>
