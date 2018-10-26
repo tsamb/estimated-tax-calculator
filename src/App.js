@@ -144,6 +144,7 @@ class App extends Component {
   render() {
     return (
       <div className='App-container'>
+        <h2>2018 Self-Employment Tax and Deduction Worksheet</h2>
         <form onSubmit={this.handleSubmit}>
             {this.se_tax_fields.map((field, i) =>
               <label key={i}>
