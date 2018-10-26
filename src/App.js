@@ -100,8 +100,19 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: parseInt(event.target.value) });
+  handleChange = (event) => {
+    const changedFieldName = event.target.name
+    const changedFieldValue = parseInt(event.target.value)
+    this.setState((state, props) => {
+      const updatedState = state
+      updatedState[changedFieldName] = changedFieldValue
+      this.se_tax_fields.forEach((field) => {
+        if (field.computed) {
+          updatedState[field.name] = field.op(updatedState)
+        }
+      })
+      return updatedState
+    });
   }
 
   handleSubmit(event) {
