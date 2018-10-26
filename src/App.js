@@ -105,7 +105,11 @@ class App extends Component {
     const changedFieldValue = parseInt(event.target.value)
     this.setState((state, props) => {
       const updatedState = state
-      updatedState[changedFieldName] = changedFieldValue
+      if (isNaN(changedFieldValue)) {
+        updatedState[changedFieldName] = 0
+      } else {
+        updatedState[changedFieldName] = changedFieldValue
+      }
       this.se_tax_fields.forEach((field) => {
         if (field.computed) {
           updatedState[field.name] = field.op(updatedState)
