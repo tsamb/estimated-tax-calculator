@@ -94,7 +94,7 @@ class App extends Component {
     ]
 
     this.state = {}
-    this.se_tax_fields.forEach(field => this.state[field.name] = '')
+    this.se_tax_fields.forEach(field => this.state[field.name] = 0)
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
