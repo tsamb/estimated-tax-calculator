@@ -61,7 +61,7 @@ class App extends Component {
         instruction:  "Subtract line 6 from line 5. Note. If line 7 is zero or less, enter -0- on line 9 and skip to line 10.",
         explanation: "",
         computed: true,
-        op: values => values["6"] - values["5"]
+        op: values => values["5"] - values["6"]
       },
       {
         name: "8",
