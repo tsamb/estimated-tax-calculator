@@ -116,7 +116,7 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert(`You are able to deduct $${this.state['11']} of your self employment taxes this year`);
     event.preventDefault();
   }
 
