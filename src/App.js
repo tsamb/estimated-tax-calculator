@@ -127,7 +127,7 @@ class App extends Component {
           {this.se_tax_fields.map((field, i) =>
             <label key={i}>
               <div><span>{field.name}. </span>{field.instruction}</div>
-              <input name={field.name} disabled={field.computed} type="text" onChange={this.handleChange} type='number'/>
+              <input name={field.name} disabled={field.computed} value={field.computed ? this.state[field.name].toFixed(2) : this.state[field.name]} type="number" onChange={this.handleChange}/>
             </label>
           )}
         </div>
