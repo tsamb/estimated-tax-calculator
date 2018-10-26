@@ -27,8 +27,12 @@
   width: 650px;
 }
 
-.App-field {
+input {
   width: 150px;
+}
+
+input:not([disabled]):not([type="submit"]) {
+  border-color: #b5f2b0;
 }
 
 @keyframes App-logo-spin {
