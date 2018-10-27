@@ -28,6 +28,9 @@ class SelfEmploymentForm extends Component {
       }
       this.fields.forEach((field) => {
         if (field.computed) {
+          // TODO: delegate field.op() call to somwhere else that can handle errors
+          //       like references to non-existent field names. Or should we try
+          //       to eliminate errors like this through a data validator?
           updatedState[field.name] = field.op(updatedState)
         }
       })
