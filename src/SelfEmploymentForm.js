@@ -7,8 +7,10 @@ class SelfEmploymentForm extends Component {
 
     this.fields = props.fields;
 
-    this.state = {}
-    this.fields.forEach(field => this.state[field.name] = 0)
+    this.state = this.fields.reduce((state, field) => {
+      state[field.name] = 0
+      return state
+    }, {})
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
