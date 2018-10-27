@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Field from './Field';
 
 class SelfEmploymentForm extends Component {
   constructor(props) {
@@ -37,11 +38,7 @@ class SelfEmploymentForm extends Component {
     event.preventDefault();
   }
 
-  componentDidMount(){
-    this.initialFocusField.focus();
-  }
-
-  displayValue(field) {
+  displayFromState(field) {
     if (field.computed) {
       return this.state[field.name].toFixed(2)
     } else {
@@ -57,17 +54,11 @@ class SelfEmploymentForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         {this.fields.map((field, i) =>
-          <label key={i}>
-            <div><span>{field.name}. </span>{field.instruction}</div>
-            <input
-              name={field.name}
-              ref={(input) => { if (field.firstField) { this.initialFocusField = input } }}
-              disabled={field.computed}
-              value={this.displayValue(field)}
-              type="number"
-              onChange={this.handleChange}
-              className='App-field' />
-          </label>
+          <Field
+            field={field}
+            display={this.displayFromState(field)}
+            key={i}
+            handleChange={this.handleChange} />
         )}
         <div>
           <input type="submit" value="Submit" />
