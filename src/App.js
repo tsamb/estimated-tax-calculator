@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SelfEmploymentForm from './SelfEmploymentForm';
-import selfEmploymentFields from './selfEmploymentFields'
+import selfEmploymentFields from './data/selfEmploymentFields'
 
 class App extends Component {
   constructor(props) {
