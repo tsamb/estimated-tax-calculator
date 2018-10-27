@@ -34,15 +34,15 @@ class SelfEmploymentForm extends Component {
   }
 
   handleSubmit(event) {
-    alert(`You are able to deduct $${this.state['11'].toFixed(2)} of your self employment taxes this year`);
     event.preventDefault();
+    alert(`Some meaningful message here`);
   }
 
   displayFromState(field) {
     if (field.computed) {
       return this.state[field.name].toFixed(2)
     } else {
-      if (this.state[field.name] == 0) {
+      if (this.state[field.name] === 0) {
         return ''
       } else {
         return this.state[field.name]
