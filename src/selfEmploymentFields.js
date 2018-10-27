@@ -26,7 +26,7 @@ export default [
       instruction:  "Multiply line 2 by 92.35% (0.9235). If less than $400, don’t complete this worksheet; you won’t owe self-employment tax on your expected net earnings from self-employment.",
       explanation: "7.65% is the combined  tax rate for Social Security and Medicare. This field is your income less that tax.",
       computed: true,
-      op: values => values["2"] * 0.9235
+      op: values => Math.max(0, values["2"] * 0.9235)
     },
     {
       name: "4",
@@ -68,7 +68,7 @@ export default [
       instruction:  "Multiply line 8 by 12.4% (0.124)",
       explanation: "",
       computed: true,
-      op: values => values["8"] * 0.124
+      op: values => Math.max(0, values["8"] * 0.124)
     },
     {
       name: "10",
