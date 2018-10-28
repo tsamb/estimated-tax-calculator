@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Field from './Field';
 
-class SelfEmploymentForm extends Component {
+class EstimatedTaxForm extends Component {
   constructor(props) {
     super(props);
 
@@ -73,4 +73,4 @@ class SelfEmploymentForm extends Component {
   }
 }
 
-export default SelfEmploymentForm;
+export default EstimatedTaxForm;
