@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Field from './Field';
+import taxTable from './data/taxTables'
+import calculateTax from './calculateTax'
 
 class EstimatedTaxForm extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class EstimatedTaxForm extends Component {
           // TODO: delegate field.op() call to somwhere else that can handle errors
           //       like references to non-existent field names. Or should we try
           //       to eliminate errors like this through a data validator?
-          updatedState[field.name] = field.op(updatedState)
+          updatedState[field.name] = field.op(updatedState, taxTable, calculateTax)
         }
       })
       return updatedState
