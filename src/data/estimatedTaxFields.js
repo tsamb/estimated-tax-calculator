@@ -85,11 +85,39 @@ export default [
     op: values => values["SE-10"] * 0.5
   },
   {
-    name: "ET-1",
-    instruction: "Adjusted gross income you expect in 2018 (see instructions)",
+    name: "Custom-1",
+    instruction: "Other income you expect in 2018 without adjustments (e.g. interest, dividends, your spouse's income if filing jointly)",
     explanation: "",
     computed: false,
     op: values => {}
+  },
+  {
+    name: "Custom-2",
+    instruction: "Max Solo 401(k) contribution (assuming no other 401(k) or 403(b) contributions)",
+    explanation: "",
+    computed: true,
+    op: values => (values["SE-1a"] - values["SE-11"]) * 0.2 + Math.min(values["SE-1a"],18500)
+  },
+  {
+    name: "Custom-3",
+    instruction: "Solo 401(k) election",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "Custom-4",
+    instruction: "HSA contributions (max $3450 for single HDHP plan, $6900 for a family HDHP plan)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "ET-1",
+    instruction: "Adjusted gross income you expect in 2018 (see instructions)",
+    explanation: "",
+    computed: true,
+    op: values => values["SE-1a"] + values["SE-6"] + values["Custom-1"] - values["SE-11"] - values["Custom-3"] - values["Custom-4"]
   },
   {
     name: "ET-2a",
@@ -201,7 +229,7 @@ export default [
   {
     name: "ET-12b",
     instruction: "Required annual payment based on prior year's tax (see instructions)",
-    explanation: "",
+    explanation: "Almost always is line 63 of your 2017 1040. Somtimes includes reductions from that number.",
     computed: false,
     op: values => {}
     // eventually calculate based on Q&A + static data
@@ -210,7 +238,7 @@ export default [
     name: "ET-12c",
     instruction: "Required annual payment to avoid a penalty. Enter the smaller of line 12a or 12b. Caution: Generally, if you do not prepay (through income tax withholding and estimated tax payments) at least the amount on line 12c, you may owe a penalty for not paying enough estimated tax. To avoid a penalty, make sure your estimate on line 11c is as accurate as possible. Even if you pay the required annual payment, you may still owe tax when you file your return. If you prefer, you can pay the amount shown on line 11c. For details, see chapter 2 of Pub. 505.",
     explanation: "",
-    computed: false,
+    computed: true,
     op: values => Math.min(values["ET-12a"], values["ET-12b"])
   },
   {
