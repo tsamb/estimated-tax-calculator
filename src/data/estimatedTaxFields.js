@@ -188,8 +188,7 @@ export default [
     instruction: "Tax. Figure your tax on the amount on line 3 by using the 2018 Tax Rate Schedules. Caution: If you will have qualified dividends or a net capital gain, or expect to exclude or deduct foreign earned income or housing, see Worksheets 2-5 and 2-6 in Pub. 505 to figure the tax",
     explanation: "",
     computed: true,
-    op: (values, taxTable, calculateTax) => calculateTax(values["ET-3"], taxTable)
-    // eventually calculate based on Q&A + static data
+    op: (values, taxTables, calculateTax) => calculateTax(values["ET-3"], taxTables[(values["Question-1"] ? "single" : "marriedFilingJointly")])
   },
   {
     name: "ET-5",
