@@ -2,14 +2,14 @@ export default [
   {
     name: "Question-1",
     firstField: true,
-    instruction: "Are you single? (1 for yes, 0 for married filing jointly)",
+    instruction: "Are you single? (1 for yes, blank for married filing jointly)",
     explanation: "",
     computed: false,
     op: values => {}
   },
   {
     name: "Question-2",
-    instruction: "Are you a farmer or fisherman? (1 for yes, 0 for no)",
+    instruction: "Are you a farmer or fisherman? (1 for yes, blank for no)",
     explanation: "",
     computed: false,
     op: values => {}
