@@ -1,7 +1,43 @@
 export default [
   {
-    name: "SE-1a",
+    name: "Question-1",
     firstField: true,
+    instruction: "Are you single? (1 for yes, 0 for married filing jointly)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "Question-2",
+    instruction: "Are you a farmer or fisherman? (1 for yes, 0 for no)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "Question-3",
+    instruction: "What was your AGI in 2017? (Line of 37 your 2017 1040)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "Question-4",
+    instruction: "How much total tax did you owe in 2017? (Line 63 of your 2017 1040)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+  {
+    name: "Question-5",
+    instruction: "What is the sum of your 2017 1040, lines 58, 59, 61, 62, 66a, 67, 68, 69, 72 and Form 8885 from 73? (These are usually blank.)",
+    explanation: "",
+    computed: false,
+    op: values => {}
+  },
+
+  {
+    name: "SE-1a",
     instruction: "Enter your expected income and profits subject to self-employment tax*",
     explanation: "",
     computed: false,
@@ -223,16 +259,17 @@ export default [
     instruction: "Multiply line 11c by 90% (66 2/3% for farmers and fishermen)",
     explanation: "",
     computed: true,
-    op: values => values["ET-11c"] * 0.9
-    // eventually calculate based on Q&A + static data
+    op: values => values["ET-11c"] * (values["Question-2" ] ? 0.6666 : 0.9)
   },
   {
     name: "ET-12b",
     instruction: "Required annual payment based on prior year's tax (see instructions)",
     explanation: "Almost always is line 63 of your 2017 1040. Somtimes includes reductions from that number.",
-    computed: false,
-    op: values => {}
-    // eventually calculate based on Q&A + static data
+    computed: true,
+    op: values => {
+      const adj_tax = values["Question-4"] - values["Question-5"]
+      return values["Question-3"] > 150000 ? adj_tax * 1.1 : adj_tax
+    }
   },
   {
     name: "ET-12c",
