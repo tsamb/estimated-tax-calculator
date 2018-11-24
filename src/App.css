@@ -20,11 +20,12 @@
 .App-container {
   display: flex;
   margin-left: 50px;
+  margin-right: 50px;
 }
 
 
 .EstimatedTaxForm {
-  max-width: 400px
+  margin-right: 50px;
 }
 
 .EstimatedTaxForm-field {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import EstimatedTaxForm from './EstimatedTaxForm';
+import DisplayForm from './DisplayForm'
 
 import estimatedTaxFields from './data/estimatedTaxFields'
 import taxTables from './data/taxTables'
@@ -46,7 +47,12 @@ class App extends Component {
         <EstimatedTaxForm
           fields={estimatedTaxFields}
           handleChange={this.handleChange}
-          appState={this.state} />
+          appState={this.state}
+        />
+        <DisplayForm
+          fields={estimatedTaxFields}
+          appState={this.state}
+        />
       </div>
     );
   }

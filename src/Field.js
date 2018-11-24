@@ -19,7 +19,7 @@ class Field extends Component {
           <input
             name={this.props.field.name}
             ref={(input) => { if (this.props.field.firstField) { this.initialFocusField = input } }}
-            disabled={this.props.field.computed}
+            disabled={this.props.field.computed || this.props.forceDisable}
             value={this.props.display}
             type="number"
             onChange={this.props.handleChange}
