@@ -10,7 +10,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "deploy": "GENERATE_SOURCEMAP=false npm run build && aws s3 sync build/ s3://self-employment-calculator --acl public-read --delete",
+    "predeploy": "GENERATE_SOURCEMAP=false npm run build",
+    "deploy": "aws s3 sync build/ s3://self-employment-calculator --acl public-read --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E2BHSODQ6D4LOM --paths '/*'",
+    "fulldeploy": "npm run predeploy && npm run deploy && npm run postdeploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
