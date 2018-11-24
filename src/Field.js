@@ -7,17 +7,25 @@ class Field extends Component {
 
   render() {
     return (
-      <label>
-        <div><span>{this.props.field.name}. </span>{this.props.field.instruction}</div>
-        <input
-          name={this.props.field.name}
-          ref={(input) => { if (this.props.field.firstField) { this.initialFocusField = input } }}
-          disabled={this.props.field.computed}
-          value={this.props.display}
-          type="number"
-          onChange={this.props.handleChange}
-          className='App-field' />
-      </label>
+      <div>
+        <div>
+          <h5>{this.props.field.name}</h5>
+          <p>{this.props.field.instruction}</p>
+          { this.props.field.explanation &&
+            <p>{this.props.field.explanation}</p>
+          }
+        </div>
+        <label>
+          <input
+            name={this.props.field.name}
+            ref={(input) => { if (this.props.field.firstField) { this.initialFocusField = input } }}
+            disabled={this.props.field.computed}
+            value={this.props.display}
+            type="number"
+            onChange={this.props.handleChange}
+            className='EstimatedTaxForm-field' />
+        </label>
+      </div>
     );
   }
 }
