@@ -10,15 +10,7 @@ class EstimatedTaxForm extends Component {
   }
 
   displayFromState(field) {
-    if (field.computed) {
-      return this.props.appState[field.name].toFixed(2)
-    } else {
-      if (this.props.appState[field.name] === 0) {
-        return '0'
-      } else {
-        return this.props.appState[field.name]
-      }
-    }
+    return this.props.appState[field.name].toFixed(2)
   }
 
   render() {
@@ -26,13 +18,19 @@ class EstimatedTaxForm extends Component {
       <div className='DisplayForm'>
         <h2>2018 Estimated Tax Worksheet</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.fields.map((field, i) =>
-            <Field
-              field={field}
-              display={this.displayFromState(field)}
-              key={i}
-              forceDisable={true} />
-          )}
+          <table>
+            {this.fields.map((field, i) =>
+              <tr>
+                <td><span className='DisplayForm-number'>{field.name}. </span>{field.instruction}</td>
+                <td>
+                <input
+                  disabled={true}
+                  value={this.displayFromState(field)}
+                  className='DisplayForm-field' />
+                </td>
+              </tr>
+            )}
+          </table>
         </form>
       </div>
 

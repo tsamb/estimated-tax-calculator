@@ -31,3 +31,7 @@
 .EstimatedTaxForm-field {
   width: 150px;
 }
+
+.DisplayForm-number {
+  font-weight: bold;
+}
