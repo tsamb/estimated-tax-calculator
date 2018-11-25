@@ -4,7 +4,7 @@ import Field from './Field';
 class EstimatedTaxForm extends Component {
   constructor(props) {
     super(props);
-    this.fields = this.props.fields.filter(field => !field.computed)
+    this.fields = this.props.fields.filter(field => !field.computed || field.formName === "custom")
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
