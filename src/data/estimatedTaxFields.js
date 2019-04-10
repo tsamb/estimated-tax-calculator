@@ -19,7 +19,7 @@ export default [
   {
     name: "Question-3",
     formName: "custom",
-    instruction: "What was your AGI in 2017? (Line of 37 your 2017 1040)",
+    instruction: "What was your AGI in 2018? (Line of 7 your 2018 1040)",
     explanation: "",
     computed: false,
     op: values => {}
@@ -27,7 +27,7 @@ export default [
   {
     name: "Question-4",
     formName: "custom",
-    instruction: "How much total tax did you owe in 2017? (Line 63 of your 2017 1040)",
+    instruction: "How much total tax did you owe in 2018? (Line 15 of your 2018 1040)",
     explanation: "",
     computed: false,
     op: values => {}
@@ -35,7 +35,7 @@ export default [
   {
     name: "Question-5",
     formName: "custom",
-    instruction: "What is the sum of your 2017 1040, lines 58, 59, 61, 62, 66a, 67, 68, 69, 72 and Form 8885 from 73? (These are usually blank.)",
+    instruction: "What is the sum of your 2018 1040: Schedule 4 lines 58, 59, 61, 62; refundable credits on Form 1040 lines 17a, b or c; and credit from Form 8885 on line 74? (These are usually blank.)",
     explanation: "",
     computed: false,
     op: values => {}
@@ -87,7 +87,7 @@ export default [
     instruction:  "Social security tax maximum income",
     explanation: "You pay Social Security tax on your first $128,400 of earnings (per person if you're married)",
     computed: true,
-    op: values => 128400
+    op: values => 132900
   },
   {
     name: "SE-6",
@@ -103,7 +103,7 @@ export default [
     instruction:  "Subtract line 6 from line 5. Note. If line 7 is zero or less, enter -0- on line 9 and skip to line 10.",
     explanation: "",
     computed: true,
-    op: values => values["SE-5"] - values["SE-6"]
+    op: values => Math.max(0, values["SE-5"] - values["SE-6"])
   },
   {
     name: "SE-8",
@@ -119,12 +119,12 @@ export default [
     instruction:  "Multiply line 8 by 12.4% (0.124)",
     explanation: "",
     computed: true,
-    op: values => Math.max(0, values["SE-8"] * 0.124)
+    op: values => values["SE-8"] * 0.124
   },
   {
     name: "SE-10",
     formName: "se-tax-worksheet",
-    instruction: "Add lines 4 and 9. Enter the result here and on line 9 of your 2018 Estimated Tax Worksheet",
+    instruction: "Add lines 4 and 9. Enter the result here and on line 9 of your 2019 Estimated Tax Worksheet",
     explanation: "",
     computed: true,
     op: values => values["SE-4"] + values["SE-9"]
@@ -132,7 +132,7 @@ export default [
   {
     name: "SE-11",
     formName: "se-tax-worksheet",
-    instruction: "Multiply line 10 by 50% (0.50). This is your expected deduction for self-employment tax on Form 1040, line 27. Subtract this amount when figuring your expected AGI on line 1 of your 2018 Estimated Tax Worksheet",
+    instruction: "Multiply line 10 by 50% (0.50). This is your expected deduction for self-employment tax on Form 1040, line 27. Subtract this amount when figuring your expected AGI on line 1 of your 2019 Estimated Tax Worksheet",
     explanation: "",
     computed: true,
     op: values => values["SE-10"] * 0.5
@@ -140,7 +140,7 @@ export default [
   {
     name: "Custom-1",
     formName: "custom",
-    instruction: "Other income you expect in 2018 without adjustments (e.g. interest, dividends, your spouse's income if filing jointly)",
+    instruction: "Other income you expect in 2019 without adjustments (e.g. interest, dividends, your spouse's income if filing jointly)",
     explanation: "",
     computed: false,
     op: values => {}
@@ -172,7 +172,7 @@ export default [
   {
     name: "ET-1",
     formName: "estimated-tax-worksheet",
-    instruction: "Adjusted gross income you expect in 2018 (see instructions)",
+    instruction: "Adjusted gross income you expect in 2019 (see instructions)",
     explanation: "",
     computed: true,
     op: values => values["SE-1a"] + values["SE-6"] + values["Custom-1"] - values["SE-11"] - values["Custom-3"] - values["Custom-4"]
@@ -212,7 +212,7 @@ export default [
   {
     name: "ET-4",
     formName: "estimated-tax-worksheet",
-    instruction: "Tax. Figure your tax on the amount on line 3 by using the 2018 Tax Rate Schedules. Caution: If you will have qualified dividends or a net capital gain, or expect to exclude or deduct foreign earned income or housing, see Worksheets 2-5 and 2-6 in Pub. 505 to figure the tax",
+    instruction: "Tax. Figure your tax on the amount on line 3 by using the 2019 Tax Rate Schedules. Caution: If you will have qualified dividends or a net capital gain, or expect to exclude or deduct foreign earned income or housing, see Worksheets 2-5 and 2-6 in Pub. 505 to figure the tax",
     explanation: "",
     computed: true,
     op: (values, taxTables, calculateTax) => calculateTax(values["ET-3"], taxTables[(values["Question-1"] ? "single" : "marriedFilingJointly")])
@@ -284,7 +284,7 @@ export default [
   {
     name: "ET-11c",
     formName: "estimated-tax-worksheet",
-    instruction: "Total 2018 estimated tax. Subtract line 11b from line 11a. If zero or less, enter -0-",
+    instruction: "Total 2019 estimated tax. Subtract line 11b from line 11a. If zero or less, enter -0-",
     explanation: "",
     computed: true,
     op: values => Math.max(0, values["ET-11a"] - values["ET-11b"])
@@ -301,7 +301,7 @@ export default [
     name: "ET-12b",
     formName: "estimated-tax-worksheet",
     instruction: "Required annual payment based on prior year's tax (see instructions)",
-    explanation: "Almost always is line 63 of your 2017 1040. Somtimes includes reductions from that number.",
+    explanation: "Almost always is line 15 of your 2018 1040. Somtimes includes reductions from that number.",
     computed: true,
     op: values => {
       const adj_tax = values["Question-4"] - values["Question-5"]
@@ -319,8 +319,8 @@ export default [
   {
     name: "ET-13",
     formName: "estimated-tax-worksheet",
-    instruction: "Income tax withheld and estimated to be withheld during 2018 (including income tax withholding on pensions, annuities, certain deferred income, etc.)",
-    explanation: "Look at your latest paycheck(s) to see how much federal income tax is withheld per pay period and how much has been withheld year to date, then project the approximate year end total withholdings.",
+    instruction: "Income tax withheld and estimated to be withheld during 2019 (including income tax withholding on pensions, annuities, certain deferred income, etc.)",
+    explanation: "Look at your latest paycheck(s) (incl spouse if married filing jointly) to see how much federal income tax is withheld per pay period and how much has been withheld year to date, then project the approximate year end total withholdings.",
     computed: false,
     op: values => {}
   },
@@ -343,7 +343,7 @@ export default [
   {
     name: "ET-15",
     formName: "estimated-tax-worksheet",
-    instruction: "If the first payment you are required to make is due April 17, 2018, enter 1⁄4 of line 14a (minus any 2017 overpayment that you are applying to this installment) here, and on your estimated tax payment voucher(s) if you are paying by check or money order.",
+    instruction: "If the first payment you are required to make is due April 15, 2019, enter 1⁄4 of line 14a (minus any 2018 overpayment that you are applying to this installment) here, and on your estimated tax payment voucher(s) if you are paying by check or money order.",
     explanation: "",
     computed: true,
     op: values => values["ET-14a"] < 0 || values["ET-14b"] < 1000 ? 0 : values["ET-14a"] * 0.25

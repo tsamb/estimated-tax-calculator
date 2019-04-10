@@ -1,8 +1,8 @@
 import calculateTax from './calculateTax'
-import taxTables from './data/taxTables'
+import taxTables2018 from './data/taxTables2018'
 
 describe('calculateTax', () => {
-  const mjfTable = taxTables["marriedFilingJointly"]
+  const mjfTable = taxTables2018["marriedFilingJointly"]
   describe('for married filing jointly', () => {
     it('calculates the tax for income less than the lowest bracket', () => {
       expect(calculateTax(10000, mjfTable)).toEqual(1000)
