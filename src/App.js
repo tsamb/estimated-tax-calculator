@@ -3,8 +3,8 @@ import './App.css';
 import EstimatedTaxForm from './EstimatedTaxForm';
 import DisplayForm from './DisplayForm'
 
-import estimatedTaxFields from './data/estimatedTaxFields'
-import taxTables from './data/taxTables'
+import estimatedTaxFields from './data/estimatedTaxFields2019'
+import taxTables from './data/taxTables2019'
 
 import calculateTax from './calculateTax'
 
