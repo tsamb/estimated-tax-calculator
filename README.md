@@ -2,13 +2,10 @@
 
 Single page app for estimating estimated quarterly tax payments based off the IRS's worksheets.
 
-Currently hosted at: http://self-employment-calculator.s3-website-us-east-1.amazonaws.com/
+Currently hosted at: https://www.quarterlyestimates.com/
 
 `npm run-script build` to create the static files for uploading to S3.
 
-## Todos
+# DISCLAIMER
 
-- [ ] Extend input data structure to accommodate static data like tax tables
-- [ ] Merge interdependent forms together or otherwise share state
-- [ ] Find official 199A worksheet (if any) or guidance
-- [ ] Design and implement question interface
+I am not a tax lawyer or accountant and this is not intended as legal or tax advice. There most likely **_are bugs_** in this software. So please consult a tax advisor if you want the assurance of 100% accuracy on your taxes. This tool is intended only to help you filling out your 1040ES without having to do all of the annoying manual (and unintuitive) calculations.
